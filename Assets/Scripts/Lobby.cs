@@ -32,10 +32,7 @@ namespace Photon.Pun.UtilityScripts
         public Image MicIcon;
         public Sprite Micon;
         public Sprite Micoff;
-
-     
-        
-
+           
         public void Start()
         {
             Application.targetFrameRate = 60;
@@ -61,7 +58,7 @@ namespace Photon.Pun.UtilityScripts
 
         public void Connect()
         {
-            Debug.Log("ConnectAndJoinRandom.ConnectNow() will now call: PhotonNetwork.ConnectUsingSettings().");
+            Debug.Log("Connecting.....");
 
             PhotonNetwork.ConnectUsingSettings();
 
@@ -86,7 +83,7 @@ namespace Photon.Pun.UtilityScripts
 
         public void CreateRoom()
         {
-            
+         
             if (_username.text.Length <= 1) { Debug.Log("No username!!!"); return; }
             PhotonNetwork.NickName = _username.text;
 
@@ -100,31 +97,27 @@ namespace Photon.Pun.UtilityScripts
 
             PhotonNetwork.NickName = _username.text;
 
-           
-          //  _lobbyname.text = PhotonNetwork.CurrentRoom.Name;
+                   
         }
 
         public override void OnJoinedRoom()
         {
            
-                // THIS is where you are actually in the room!
-                Debug.Log("Successfully joined room: " + PhotonNetwork.CurrentRoom.Name);
-            Debug.Log($"Players in room ({PhotonNetwork.CurrentRoom.PlayerCount}):");
-            foreach (Player p in PhotonNetwork.CurrentRoom.Players.Values)
-            {
-                Debug.Log($"  - {p.NickName} (IsLocal: {p.IsLocal})");
-            }
-
-            ConnectedInRoom = true; // Update your state flag           
+              
+            //Update Status
+            ConnectedInRoom = true;    
+            
+            //Disable LobbyUI
             uIManager.DisableLobbyUI();
+
+            //Mic Transmisson
             _recorder.TransmitEnabled = _micTransmit;
             _mic.isOn = _micTransmit;
-            Debug.Log("Room: " + PhotonNetwork.CurrentRoom.Name); // Display the room name in UI'
+          
             Avatar.SetActive(true);
            
 
-            // Now you can load your game scene or spawn player prefabs, etc.
-            // PhotonNetwork.LoadLevel("GameScene");
+           
         }
 
         public override void OnCreateRoomFailed(short returnCode, string message)
@@ -147,7 +140,7 @@ namespace Photon.Pun.UtilityScripts
 
         public override void OnJoinRandomFailed(short returnCode, string message)
         {
-            Debug.Log("OnJoinRandomFailed() was called by PUN. No random room available in region [" + PhotonNetwork.CloudRegion + "], so we create one. Calling: PhotonNetwork.CreateRoom(null, new RoomOptions() {maxPlayers = 4}, null);");         
+            Debug.Log("Join Failed!!!!");         
         }
 
        public void MicTransmit(bool value)
@@ -156,14 +149,12 @@ namespace Photon.Pun.UtilityScripts
 
             if (value)
             {
-                MicIcon.sprite = Micon;
-                Debug.Log("On");
+                MicIcon.sprite = Micon;             
             }
 
             else
             {
-                MicIcon.sprite = Micoff;
-                Debug.Log("off");
+                MicIcon.sprite = Micoff;               
             }
         }
     }
