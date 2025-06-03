@@ -3,6 +3,8 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [Header("LobbyUI")]
+    public GameObject LobbyCanvas;
+    public GameObject StartCanvas;
     public GameObject RoomCreation;
     public GameObject JoinRoom;
 
@@ -23,4 +25,14 @@ public class UIManager : MonoBehaviour
         Mic.SetActive(true);
     }
     
+    public void EnableLobbyCanvas()
+    {
+        StartCanvas.SetActive(false);
+        LobbyCanvas.SetActive(true);
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }

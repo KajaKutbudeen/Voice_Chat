@@ -9,11 +9,8 @@ namespace Photon.Pun.UtilityScripts
 {
     public class Lobby : MonoBehaviourPunCallbacks
     {
-        [Header("Debug")]
-        public GameObject Player;
-        public Transform Spawnpos;
-
-        public byte Version = 1;
+        
+       public byte Version = 1;
 
         [Header("Mic")]
         public Recorder _recorder;
@@ -29,12 +26,14 @@ namespace Photon.Pun.UtilityScripts
         [SerializeField] private TextMeshProUGUI _username;
         [SerializeField] private TextMeshProUGUI _roomName;
         public UIManager uIManager;
+        public GameObject Avatar;
 
         [Header("Sprite Swap")]
         public Image MicIcon;
         public Sprite Micon;
         public Sprite Micoff;
 
+     
         
 
         public void Start()
@@ -107,9 +106,9 @@ namespace Photon.Pun.UtilityScripts
 
         public override void OnJoinedRoom()
         {
-
-            // THIS is where you are actually in the room!
-            Debug.Log("Successfully joined room: " + PhotonNetwork.CurrentRoom.Name);
+           
+                // THIS is where you are actually in the room!
+                Debug.Log("Successfully joined room: " + PhotonNetwork.CurrentRoom.Name);
             Debug.Log($"Players in room ({PhotonNetwork.CurrentRoom.PlayerCount}):");
             foreach (Player p in PhotonNetwork.CurrentRoom.Players.Values)
             {
@@ -121,8 +120,8 @@ namespace Photon.Pun.UtilityScripts
             _recorder.TransmitEnabled = _micTransmit;
             _mic.isOn = _micTransmit;
             Debug.Log("Room: " + PhotonNetwork.CurrentRoom.Name); // Display the room name in UI'
-
-            GameObject _player = PhotonNetwork.Instantiate(Player.name, Spawnpos.transform.position, Quaternion.identity);
+            Avatar.SetActive(true);
+           
 
             // Now you can load your game scene or spawn player prefabs, etc.
             // PhotonNetwork.LoadLevel("GameScene");
