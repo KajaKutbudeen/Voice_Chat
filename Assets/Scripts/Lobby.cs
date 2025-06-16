@@ -9,8 +9,10 @@ namespace Photon.Pun.UtilityScripts
 {
     public class Lobby : MonoBehaviourPunCallbacks
     {
-        
+
+        [Header("Debug")]
        public byte Version = 1;
+        
 
         [Header("Mic")]
         public Recorder _recorder;
@@ -22,9 +24,12 @@ namespace Photon.Pun.UtilityScripts
         [SerializeField] private int maxPlayers;
         [SerializeField] private bool ConnectedInRoom = false;
 
-        [Header("UI")]
-        [SerializeField] private TextMeshProUGUI _username;
+        [Header("Join Room")]
+        [SerializeField] private TextMeshProUGUI _guestname;
         [SerializeField] private TextMeshProUGUI _roomName;
+
+        [Header("UI")]
+        [SerializeField] private TextMeshProUGUI _username;     
         public UIManager uIManager;
         public GameObject Avatar;
 
@@ -32,6 +37,8 @@ namespace Photon.Pun.UtilityScripts
         public Image MicIcon;
         public Sprite Micon;
         public Sprite Micoff;
+
+        private int id = 0;
            
         public void Start()
         {
@@ -79,8 +86,6 @@ namespace Photon.Pun.UtilityScripts
            
         }
 
-
-
         public void CreateRoom()
         {
          
@@ -97,18 +102,25 @@ namespace Photon.Pun.UtilityScripts
 
             PhotonNetwork.NickName = _username.text;
 
-                   
+            id = 1;
         }
 
-        public override void OnJoinedRoom()
+        [PunRPC]
+        public void changevalue()
         {
-           
+            Version += 1;
+            Debug.Log("Version:" + Version);
+        }
+        public override void OnJoinedRoom()
+        {           
               
             //Update Status
-            ConnectedInRoom = true;    
-            
+            ConnectedInRoom = true;
+
             //Disable LobbyUI
-            uIManager.DisableLobbyUI();
+            //  uIManager.DisableLobbyUI();
+            if(id == 1) uIManager.disableRoomCreation();
+            else if(id == 2) uIManager.disableJoinRoom();              
 
             //Mic Transmisson
             _recorder.TransmitEnabled = _micTransmit;
@@ -131,11 +143,14 @@ namespace Photon.Pun.UtilityScripts
         }
         public void Joinroom()
         {
-            if (_roomName.text.Length <= 1) { Debug.Log("No Room name"); return; }
+            if (_roomName.text.Length <= 1) { Debug.Log("No Room name or no Guest name"); return; }
 
-            PhotonNetwork.NickName = "hari";
+            PhotonNetwork.NickName ="Hari";
 
-            PhotonNetwork.JoinRoom("Manju");
+            id = 2;          
+                PhotonNetwork.JoinRoom("Manju");          
+            
+
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message)
