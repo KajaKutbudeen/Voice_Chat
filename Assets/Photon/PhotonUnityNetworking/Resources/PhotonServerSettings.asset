@@ -41,6 +41,11 @@ MonoBehaviour:
   - HeresWhy
   - changevalue
   - change
+  - CheckAvatar
+  - EnableAvatar
+  - Addupcount
+  - PlayerEntry
+  - setavatar
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

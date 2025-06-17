@@ -80,5 +80,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b586f3b9ce212bd4d9bed11b3dd5e0d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lobby: {fileID: 0}
+  _uimanager: {fileID: 0}
+  _voiceAvatar: {fileID: 0}
   isadded: 0
+  isSpeaking: 0
+  id: 0

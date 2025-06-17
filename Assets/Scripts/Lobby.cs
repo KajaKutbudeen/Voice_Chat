@@ -11,7 +11,7 @@ namespace Photon.Pun.UtilityScripts
     {
 
         [Header("Debug")]
-       public byte Version = 1;
+       public byte Version = 0;
         
 
         [Header("Mic")]
@@ -105,6 +105,7 @@ namespace Photon.Pun.UtilityScripts
             id = 1;
         }
 
+       
         [PunRPC]
         public void changevalue()
         {

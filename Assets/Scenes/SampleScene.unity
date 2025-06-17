@@ -3137,6 +3137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 688679835}
   - component: {fileID: 688679834}
+  - component: {fileID: 688679836}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -3163,6 +3164,15 @@ MonoBehaviour:
   Mic: {fileID: 1157229318}
   _createnbut: {fileID: 632579501}
   _JoinRoombut: {fileID: 1877941670}
+  Avartars:
+  - {fileID: 553926143}
+  - {fileID: 1698619462}
+  - {fileID: 2099860836}
+  - {fileID: 477833429}
+  - {fileID: 1836384321}
+  - {fileID: 728771466}
+  avatarcheck: 0
+  count: -1
 --- !u!4 &688679835
 Transform:
   m_ObjectHideFlags: 0
@@ -3178,6 +3188,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &688679836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688679833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 7
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &689691838
 GameObject:
   m_ObjectHideFlags: 0
@@ -4886,7 +4918,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -23, y: -199}
+  m_AnchoredPosition: {x: -23, y: -424}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1157229320
@@ -7201,6 +7233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eba5753a72c3244c851d7450564c8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Players: []
   SpawnPosition: {fileID: 0}
   PositionOffset: 2
   PrefabsToInstantiate:
@@ -7238,7 +7271,7 @@ MonoBehaviour:
   _roomName: {fileID: 2093578218}
   _username: {fileID: 911174065}
   uIManager: {fileID: 688679834}
-  Avatar: {fileID: 750435623}
+  Avatar: {fileID: 858441033}
   MicIcon: {fileID: 1787355952}
   Micon: {fileID: 21300000, guid: 9a002c92d1f8a3c4e9147ea7ad204891, type: 3}
   Micoff: {fileID: 21300000, guid: 64b31fc96cb62fa4fbb79891fe05ae7c, type: 3}

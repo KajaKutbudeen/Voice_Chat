@@ -23,7 +23,8 @@ namespace ExitGames.Demos.DemoPunVoice
     public class CharacterInstantiation : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         public enum SpawnSequence { Connection, Random, RoundRobin }
-
+        [SerializeField]
+        List<GameObject> Players;
         public Transform SpawnPosition;
         public float PositionOffset = 2.0f;
         public GameObject[] PrefabsToInstantiate;
@@ -41,6 +42,7 @@ namespace ExitGames.Demos.DemoPunVoice
 
         protected int lastUsedSpawnPointIndex = -1;
 
+        
 #pragma warning disable 649
         [SerializeField]
         private bool manualInstantiation;
@@ -79,6 +81,7 @@ namespace ExitGames.Demos.DemoPunVoice
                 {
                     GameObject o = this.PrefabsToInstantiate[index];
                     o = PhotonNetwork.Instantiate(o.name, spawnPos, spawnRotation);
+                    Players.Add(o);
                     if (CharacterInstantiated != null)
                     {
                         CharacterInstantiated(o);
@@ -237,12 +240,13 @@ namespace ExitGames.Demos.DemoPunVoice
     [CustomEditor(typeof(CharacterInstantiation))]
     public class CharacterInstantiationEditor : Editor
     {
-        private SerializedProperty spawnPoints, prefabsToInstantiate, useRandomOffset, positionOffset, autoSpawn, manualInstantiation, differentPrefabs, localPrefabSuffix, remotePrefabSuffix, sequence, manualInstantiationEventCode;
+        private SerializedProperty players,spawnPoints, prefabsToInstantiate, useRandomOffset, positionOffset, autoSpawn, manualInstantiation, differentPrefabs, localPrefabSuffix, remotePrefabSuffix, sequence, manualInstantiationEventCode;
         private GUIStyle fieldBox;
         private const int PAD = 6;
 
         private void OnEnable()
         {
+            this.players = this.serializedObject.FindProperty("Players");
             this.spawnPoints = this.serializedObject.FindProperty("SpawnPoints");
             this.prefabsToInstantiate = this.serializedObject.FindProperty("PrefabsToInstantiate");
             this.useRandomOffset = this.serializedObject.FindProperty("UseRandomOffset");
@@ -260,6 +264,7 @@ namespace ExitGames.Demos.DemoPunVoice
         {
             EditorGUI.BeginChangeCheck();
 
+            
             this.EditableReferenceList(this.prefabsToInstantiate, new GUIContent(this.prefabsToInstantiate.displayName, this.prefabsToInstantiate.tooltip), this.fieldBox);
 
             this.EditableReferenceList(this.spawnPoints, new GUIContent(this.spawnPoints.displayName, this.spawnPoints.tooltip), this.fieldBox);
@@ -274,6 +279,7 @@ namespace ExitGames.Demos.DemoPunVoice
             EditorGUILayout.BeginVertical(this.fieldBox);
             EditorGUILayout.PropertyField(this.sequence);
             EditorGUILayout.PropertyField(this.useRandomOffset);
+            EditorGUILayout.PropertyField(this.players);
             if (this.useRandomOffset.boolValue)
             {
                 EditorGUILayout.PropertyField(this.positionOffset);
